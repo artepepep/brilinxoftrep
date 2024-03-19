@@ -130,8 +130,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_SECRET_KEY')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ]
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': [
+#         'rest_framework.renderers.JSONRenderer',
+#     ]
+# }

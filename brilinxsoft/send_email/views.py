@@ -8,12 +8,12 @@ from brilinxsoft.settings import EMAIL_HOST_USER
 def send_email(request):
     if request.method == 'POST':
         name = request.data.get('name')
-        phone = request.data.get('phone')
+        email = request.data.get('email')
         company_name = request.data.get('company_name')
         interested_service = request.data.get('interested_service')
         details = request.data.get('details')
 
-        message = f"Name: {name}\nEmail: {phone}\nClient company: {company_name}\nService: {interested_service}\nProject Details: \n{details}"
+        message = f"Name: {name}\nEmail: {email}\nClient company: {company_name}\nService: {interested_service}\nProject Details: \n{details}"
     
         send_mail(
             'BRILINXOFT New Client !!!',
