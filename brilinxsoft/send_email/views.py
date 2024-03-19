@@ -1,8 +1,6 @@
 from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import EmailSerializer
-from brilinxsoft.settings import EMAIL_HOST_USER
 
 @api_view(['POST'])
 def send_email(request):
@@ -18,12 +16,11 @@ def send_email(request):
         send_mail(
             'BRILINXOFT New Client !!!',
             message,
-            EMAIL_HOST_USER,
-            [EMAIL_HOST_USER],
+            'brilinxoft@gmail.com',
+            ['brilinxoft@gmail.com'],
             fail_silently=False,
         )
 
         return Response({'message': 'Email sent successfully.'})
     else:
-        
         return Response({'message': 'Method not allowed.'}, status=405)
