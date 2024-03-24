@@ -35,7 +35,7 @@ def send_email_pp(request):
         email_message = f"Name: {name}\nEmail: {email}\nClient message:\n{message}"
 
         send_mail(
-            'BRILINXOFT New Cliend(privacy policy)',
+            'BRILINXOFT New Client(privacy policy)',
             email_message,
             'brilinxoft@gmail.com',
             ['brilinxoft@gmail.com'],
