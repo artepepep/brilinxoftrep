@@ -24,3 +24,24 @@ def send_email(request):
         return Response({'message': 'Email sent successfully.'})
     else:
         return Response({'message': 'Method not allowed.'}, status=405)
+
+@api_view(['POST'])
+def send_email_pp(request):
+    if request.method == 'POST':
+        name = request.data.get('name')
+        email = request.data.get('email')
+        message = request.data.get('message')
+
+        email_message = f"Name: {name}\nEmail: {email}\nClient message:\n{message}"
+
+        send_mail(
+            'BRILINXOFT New Cliend(privacy policy)',
+            email_message,
+            'brilinxoft@gmail.com',
+            ['brilinxoft@gmail.com'],
+            fail_silently=False,
+        )
+        
+        return Response({'message': 'Email sent successfully.'})
+    else:
+        return Response({'message': 'Method not allowed.'}, status=405)
