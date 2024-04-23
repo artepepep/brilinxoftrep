@@ -77,25 +77,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'brilinxsoft.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('DB_NAME'),
-#         'USER': os.environ.get('DB_USER'),
-#         'PASSWORD': os.environ.get('DB_PASSWORD'),
-#         'PORT': os.environ.get('DB_PORT'),
-#         'HOST': os.environ.get('DB_HOST')
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.ktthzpvnuzgbognvccuv',
-        'PASSWORD': 'Artem22062006!!',
-        'PORT': '5432',
-        'HOST': 'aws-0-eu-central-1.pooler.supabase.com'
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'PORT': os.environ.get('DB_PORT'),
+        'HOST': os.environ.get('DB_HOST')
     }
 }
 
