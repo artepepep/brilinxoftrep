@@ -90,10 +90,7 @@ DATABASES = {
 }
 
 
-
-
-
-AUTH_USER_MODEL = 'users.UserModel'
+AUTH_USER_MODEL = 'users.Users'
 
 
 # Password validation
