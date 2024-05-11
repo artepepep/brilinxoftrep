@@ -6,3 +6,8 @@ DEVELOPER_CHOICES = [
     ('ML engeneer', 'ML engeneer'),
     ('Web designer', 'Web-designer')
 ]
+
+ADMIN_CHOICES = [
+    ('Superadmin', 'superadmin'),
+    ('Admin', 'admin')
+]

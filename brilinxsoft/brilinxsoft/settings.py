@@ -9,7 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -17,7 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'companypage-55ef8dd3b024.herokuapp.com',
-    'www.brilinxoft.com'
+    'www.brilinxoft.com',
+    '127.0.0.1'
 ]
 
 INSTALLED_APPS = [
@@ -78,6 +78,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'brilinxsoft.wsgi.application'
 
 
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,8 +90,19 @@ DATABASES = {
     }
 }
 
-
+#Authentication
 AUTH_USER_MODEL = 'users.Users'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
 
 
 # Password validation
@@ -136,7 +148,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# email settings
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -144,9 +156,3 @@ EMAIL_HOST_USER = 'brilinxoft@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ]
-}
