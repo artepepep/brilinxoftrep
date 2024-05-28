@@ -1,10 +1,13 @@
 from django.db import models
 from .choices import POST_SECTIONS
 
+class Section(models.Model):
+    name = models.CharField(max_length=100)
+
 class Post(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateField(auto_now_add=True)
-    section = models.OneToOneField(on_delete=models.CASCADE)
+    section = models.OneToOneField(Section ,on_delete=models.CASCADE)
     text = models.TextField()
 
     def __str__(self):
