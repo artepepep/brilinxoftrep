@@ -50,7 +50,7 @@ def delete_admin_user(request, *args, **kwargs):
 
 
 @api_view(['POST'])
-@permission_classes((IsSuperAdmin, ))
+# @permission_classes((IsSuperAdmin, ))
 def send_invite_to_be_admin(request):
     if request.method == 'POST':
 
