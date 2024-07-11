@@ -1,13 +1,15 @@
 from rest_framework import generics
-from .models import Post
-from .serializers import PostSerializer
-from rest_framework.permissions import IsAuthenticated
+
+from .models import Post, Section
+from .serializers import PostSerializer, SectionSerializer
+from users.permissions import CustomIsAdmin
 
 
 class GetCreatePosts(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated, )
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (CustomIsAdmin, )
+
+    queryset = Post.objects.all()
 
 
 class GetLastTenPosts(generics.ListAPIView):
@@ -25,3 +27,10 @@ class GetFixAmountPostsAPI(generics.ListAPIView):
         if quantity is not None:
             return Post.objects.all()[:quantity]
         return Post.objects.none()
+
+
+class GetCreateSection(generics.ListCreateAPIView):
+    serializer_class = SectionSerializer
+    permission_classes = (CustomIsAdmin, )
+
+    queryset = Section.objects.all()

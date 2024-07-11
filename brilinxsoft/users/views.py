@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -6,8 +7,10 @@ from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
 
 from .permissions import IsSuperAdmin
+from .serializers import ChangePasswordSerializer, LoginViewSerializer
 from .models import Users
 from .service import generate_password, get_username_from_email
+
 
 @api_view(['GET'])
 def get_request_user(request):
@@ -50,7 +53,7 @@ def delete_admin_user(request, *args, **kwargs):
 
 
 @api_view(['POST'])
-# @permission_classes((IsSuperAdmin, ))
+@permission_classes((IsSuperAdmin, ))
 def send_invite_to_be_admin(request):
     if request.method == 'POST':
 
@@ -73,3 +76,33 @@ def send_invite_to_be_admin(request):
         return Response({'message': 'email have been sent successfully'}, status=200)
     else:
         return Response({'message': 'Method not allowed.'}, status=405)
+
+
+class LoginView(generics.GenericAPIView):
+    serializer_class = LoginViewSerializer
+
+    def post(self, request):
+        username = request.data['username']
+        password = request.data['password']
+
+
+
+class ChangePasswordView(generics.GenericAPIView):
+    # permission_classes = (IsAuthenticated,)
+    serializer_class = ChangePasswordSerializer
+
+    def put(self, request, user_id):
+        password = request.data['old_password']
+        new_password = request.data['new_password']
+        re_password = request.data['repeat_password']
+
+        # user_id = request.user.id
+        user = Users.objects.get(pk=user_id)
+        if not user.check_password(raw_password=password):
+            return Response({'error': 'old password did not match'}, status=200)
+        elif new_password != re_password:
+            return Response({'error': 'password and repeat password are not the same'}, status=400)
+        else:
+            user.set_password(new_password)
+            user.save()
+            return Response({'success': 'password changed successfully'}, status=200)
